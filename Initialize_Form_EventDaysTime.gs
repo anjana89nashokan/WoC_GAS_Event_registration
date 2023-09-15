@@ -60,8 +60,8 @@ function get_setup_values(){
   
     // 10 am to 7 pm and each slot of 15 minutes.
   const start = 10;
-  const end = 12//19;
-  const slot_dur = 60//15;
+  const end = 19;
+  const slot_dur = 15;
 
     // max_limit is 2 registrations in each 15 minutes slot
   const max_limit = 2;
