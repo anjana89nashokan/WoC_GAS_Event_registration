@@ -9,11 +9,10 @@ function update_dropdown(){
   const start = setupv.start, end = setupv.end, slot_dur = setupv.slot_dur;
   const max_limit = setupv.max_limit;
 
-  const selected_day_item = form.getItems()[day_index]; 
-  var choice_temp = selected_day_item.asMultipleChoiceItem().getChoices();
+  const selected_day_item = form.getItems()[day_index];
   
   // If all dates and their slots are filled
-  if (event_days.length == 2 && event_days[0] == 'Yes' && event_days[1]== 'No'){
+  if (event_days.length == 1 && event_days[0] == 'Yes'){ //}) && event_days[1]== 'No'){
     return;
   }
 
@@ -77,14 +76,12 @@ function remove_time_choices(time_slot_choices, available, day, form, day_index,
   else{
     // remove day if all the time slots for the day is filled.
     remove_day_choices(time_slot_choices, available, form, day_index, time_index, event_days)
-    
   } 
 }
 
 function remove_day_choices(time_slot_choices, available, form, day_index, time_index, event_days){
   
   // Select the days with at least one available time slot
-  //const selected_day_item = form.getItems()[day_index];
   var day_item = form.getItems()[day_index].asMultipleChoiceItem();
   
   var available_days = [], pageGoTo = [];
@@ -107,13 +104,13 @@ function remove_day_choices(time_slot_choices, available, form, day_index, time_
   if (available_days!= 0){
     day_item.setChoices(available_days);
   }
-    // if all days are filled
+    // if no more slots are available for any day, ad the users to waitlist
   else{ 
-      //two items with Yes & No options and go to General Questions
-      day_item.setTitle('No more slots available! Do you wish to be in waitlist?');
-      // console.log("time_index[initial_event_days.length-1]: %s", time_index[initial_event_days.length-1]);
+      form.getItems()[day_index - 1].asPageBreakItem().setTitle('No more slots available! ');
+            
+      day_item.setTitle('Select the below option if you wish to be added to the waitlist');
       var page = form.getItems()[time_index[event_days.length-1]+1].asPageBreakItem();
-      day_item.setChoices([day_item.createChoice('Yes', page), day_item.createChoice('No', page)]);
+      day_item.setChoices([day_item.createChoice('I wish to be added to the waitlist', page)]) ; 
 
   }
   return;
