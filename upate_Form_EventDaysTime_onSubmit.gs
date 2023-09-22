@@ -11,10 +11,15 @@ function update_dropdown(){
 
   const selected_day_item = form.getItems()[day_index];
   
-  // If all dates and their slots are filled
-  if (event_days.length == 1 && event_days[0] == 'Yes'){ //}) && event_days[1]== 'No'){
-    return;
+    // If all dates and their slots are filled
+  var day_choices = selected_day_item.asMultipleChoiceItem().getChoices();
+  for (var i = 0; i < day_choices.length; i++){
+    if (day_choices[i].getValue() == 'I wish to be added to the waitlist'){
+      return;
+    }
   }
+
+
 
   // If the slots were not full for atleast one date
   const time_slot_choices = create_time_slots(start, end, slot_dur, event_days.length);
@@ -29,8 +34,8 @@ function update_dropdown(){
   const selected_time_item = [];
   for (var i = 0; i < event_days.length; i++){
     selected_time_item[i] = form.getItems()[time_index[i]];
+    // console.log(selected_time_item[i].getTitle());
   }
-
   var formResponses = form.getResponses();
 
   // get the index of the selected date field
@@ -46,6 +51,7 @@ function update_dropdown(){
     
     // get the time slot response for the ate selected in the previous step
     var TimeResponse = formResponse.getResponseForItem(selected_time_item[day]);
+  
     selected_time = TimeResponse.getResponse();
     
     var ind = time_slot_choices[day].indexOf(selected_time.substring(0, 8));
@@ -83,7 +89,6 @@ function remove_day_choices(time_slot_choices, available, form, day_index, time_
   
   // Select the days with at least one available time slot
   var day_item = form.getItems()[day_index].asMultipleChoiceItem();
-  
   var available_days = [], pageGoTo = [];
   
   for (var i = 0; i < event_days.length; i++){

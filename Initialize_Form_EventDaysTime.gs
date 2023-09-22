@@ -28,7 +28,7 @@ function initiate_lists(){
   const selected_day_item = form.getItems()[day_index];
   const day_item = selected_day_item.asMultipleChoiceItem();
   day_item.setChoiceValues(event_days);
-  day_item.setTitle('Pick a day to attend the event!');
+  day_item.setTitle('On which day would you like to attend the event?');
 
   //-------------------------------- Set the conditional navigation based on the selected date---------------------------//
   var choice_list = [], page = [];
