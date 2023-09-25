@@ -1,0 +1,186 @@
+Technical Design Document - Registration Form for the Tokens Of Love Event 
+
+Author: Anjana Nirmala Ashokan
+Created on: Sep 22, 2023
+Published on: Sep 25, 2023
+Form URL
+How to access the form
+Christmas Toy Giveaway 2023_Draft 3 - Google Forms
+The user role required to edit the Google form is the “Editor role”.
+Form Elements
+Email
+It is the email address provided by Google. This field becomes visible in the Google Form based on the settings.
+Go to the Settings tab.
+
+
+
+
+
+An instruction title text
+Title “Please enter your email address above.”
+Description “If you do not have an email address, please enter '123@abc.abc'. The field cannot be left blank.”
+The index of the element is 0. (This is based on the order in which the element appears in the Google form)
+
+Full Name of the Parent / Guardian
+A short answer textbox
+The index of the element is 1. (This is based on the order in which the element appears in the Google form)
+
+Relationship with the child / children
+Multichoice item - radio buttons
+It has the ‘Other’ option as well.
+The index of the element is 2. (This is based on the order in which the element appears in the Google form)
+
+Mobile Number
+A short answer text
+Constraint: must be a whole number.
+The index of the element is 3. (This is based on the order in which the element appears in the Google form)
+
+Country of Origin
+A dropdown item
+The values are auto-populated using the Apps script.
+The country list is stored in a Google spreadsheet and Apps script populated the spreadsheet values to the Google form.
+States_in_USA_School_Div_in_VA - Google Sheets
+The index of the element is 4. (This is based on the order in which the element appears in the Google form)
+
+Address Line 1 (Current Address)
+A short answer text
+An optional field.
+The index of the element is 5. (This is based on the order in which the element appears in the Google form)
+
+Address Line 2
+A short answer text.
+An optional field.
+The index of the element is 6. (This is based on the order in which the element appears in the Google form)
+
+County
+A short answer text.
+The index of the element is 7. (This is based on the order in which the element appears in the Google form)
+
+City
+A short answer text.
+The index of the element is 8. (This is based on the order in which the element appears in the Google form)
+
+State
+A dropdown item
+The values are auto-populated using the Apps script.
+The list of the states in the USA is stored in a Google spreadsheet and Apps script populated the spreadsheet values to the Google form.
+States_in_USA_School_Div_in_VA - Google Sheets
+The index of the element is 9. (This is based on the order in which the element appears in the Google form)
+
+Postal Code
+A short answer text.
+An optional field.
+The index of the element is 10. (This is based on the order in which the element appears in the Google form)
+
+U.S.A
+This is not an input field, but a description text.
+The index of the element is 11. (This is based on the order in which the element appears in the Google form)
+
+Section 2
+Title: “Pick a day to attend the event!”
+The index of the element is 12. (This is based on the order in which the element appears in the Google form)
+
+On which day would you like to attend the event?
+This is a multichoice item with radio buttons.
+Has three options.
+The index of the element is 13. (This is based on the order in which the element appears in the Google form). This index is used in the implementation by the variable “day_index”.
+“Go to section based on answer” is enabled for this field.
+If option 1 is chosen, Go to section 3.
+If option 2 is chosen, Go to section 4.
+If option 3 is chosen, Go to section 5.
+
+Section 3
+Title: “Choose a time to attend the event”
+The index of the element is 14. (This is based on the order in which the element appears in the Google form)
+
+What time on December 14th 2023 would you like to attend the event?
+This is a multichoice item with radio buttons.
+The options are auto-generated on the running script code. “Initialize_Form_EventDaysTime.gs”. Make sure to configure the values in the Apps script code “set_up_values_4_form.gs” before initiating the time slot values.
+The const day_index has the index of the “On which day would you like to attend the event?” field.
+The const array time_index should contain the indexes of the multichoice fields for the time slots for each day.
+The index of this element is 15. (This is based on the order in which the element appears in the Google form). This index is used in the implementation by the variable “time_index”.
+Go to section 6 ‘General Questions’ after this section.
+
+Section 4
+Title: “Choose a time to attend the event”
+The index of the element is 16. (This is based on the order in which the element appears in the Google form)
+
+What time on December 15th 2023 would you like to attend the event?
+This is a multichoice item with radio buttons.
+The options are auto-generated on the running script code as mentioned in the previous item.
+The index of this element is 17. (This is based on the order in which the element appears in the Google form). This index is used in the implementation by the variable “time_index”.
+Go to section 6 ‘General Questions’ after this section.
+
+Section 5
+Title: “Choose a time to attend the event”
+The index of the element is 18. (This is based on the order in which the element appears in the Google form)
+
+What time on December 15th 2023 would you like to attend the event?
+This is a multichoice item with radio buttons.
+The options are auto-generated on the running script code as mentioned in the previous item.
+The index of this element is 19. (This is based on the order in which the element appears in the Google form). This index is used in the implementation by the variable “time_index”.
+Go to section 6 ‘General Questions’ after this section.
+
+Section 6
+Title: “General Questions”
+The index of the element is 20. (This is based on the order in which the element appears in the Google form)
+
+Would you like to volunteer with our organization?
+This is a multichoice item with a radio button.
+Options - Yes, No, Maybe
+
+Does your child need academic support?
+This is a multichoice item with a radio button.
+Options - Yes, No, Maybe
+
+Do you have any physical limitations that you may require special accommodations to attend the event?
+This is a multichoice item with a radio button.
+Options - Yes, No
+
+How did you hear about us?
+This is a multichoice item with a radio button.
+The options are Friends, Family, Social media, Advertisement, Other
+If the user selected Friends, Family, or Other, go to Section 8
+If the user selects Social Media or Advertisement, go to section 7.
+
+Section 7
+Title: How did you hear about us?
+
+You heard about us through Social media/Advertisement. Please specify the platform.
+This is a short answer text.
+
+Section 8
+Title: Number of children for whom you are registering.
+
+Number of Children for whom you are registering
+This is a multichoice item with a radio button.
+The options range from 1 to 25.
+“Go to section based on answer” is enabled for this field.
+If option 1 is chosen, Go to the section for child #1.
+If option 2 is chosen, Go to the section for child #2.
+If option 3 is chosen, Go to the section for child #3, and so on.
+
+Section 9 
+Title: Details of Child #25
+
+Gender of child #25
+This is a multichoice item with a radio button.
+The options are Female, Male, Prefer not to say.
+
+Age of child #25
+This is a short answer text.
+Constraint: should be a whole number.
+
+School grade of child #25
+This is a short answer text.
+
+Sections 10 - 33
+Replicas of section 9 and its contents are duplicated for the number of children.
+
+
+How to access the Google Apps Script
+Open the Google form.
+Click on the ‘More’ icon (three dots).
+Select ‘Script editor’.
+The script editor window opens in a new tab.
+
