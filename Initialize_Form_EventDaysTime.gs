@@ -23,13 +23,14 @@ function initiate_lists(){
   const start = setupv.start, end = setupv.end, slot_dur = setupv.slot_dur;
   const max_limit = setupv.max_limit;
 
-    // Create the "Pick a date" field------------------------------------------------------------------//
-  const selected_day_item = form.getItems()[day_index]; 
+  //-------------------------------------Create the "Pick a date" field------------------------------------------------//
+  form.getItems()[day_index - 1].setTitle('Pick a day to attend the event!');
+  const selected_day_item = form.getItems()[day_index];
   const day_item = selected_day_item.asMultipleChoiceItem();
   day_item.setChoiceValues(event_days);
-  day_item.setTitle('Pick a day to attend the event!');
+  day_item.setTitle('On which day would you like to attend the event?');
 
-    // Set the conditional navigation based on the selected date ------------------------------------//
+  //-------------------------------- Set the conditional navigation based on the selected date---------------------------//
   var choice_list = [], page = [];
   for (var i = 0; i < event_days.length; i++){
     page[i] = form.getItems()[time_index[i]-1].asPageBreakItem();
@@ -37,39 +38,16 @@ function initiate_lists(){
   }
   day_item.setChoices(choice_list);
 
-  // Create time slots for each day--------------------------------------------------------------------//
+  // -------------------------------------Create time slots for each day-------------------------------//
   const time_slot_choices = create_time_slots(start, end, slot_dur, event_days.length);
   
   const selected_time_item = [];
   for (var i = 0; i < event_days.length; i++){
     selected_time_item[i] = form.getItems()[time_index[i]].asListItem();
-    selected_time_item[i].setTitle('Pick a time').setChoiceValues(time_slot_choices[i]);
+    t = 'What time on ' + event_days[i] + ' would you like to attend the event?';
+    selected_time_item[i].setTitle('What time on ' + event_days[i] + ' would you like to attend the event?').setChoiceValues(time_slot_choices[i]);
   }
 }
-
-
-
-function get_setup_values(){
-
-    //The code below needs index adjustment if the field order in the form is modified.
-  const day_index = 12; //Field item in the form
-  const time_index = [14, 16];
-    //The code above needs index adjustment if the field order in the form is modified.
-    
-  const event_days = ['December 9th 2023', 'December 10th 2023'];  
-  
-    // 10 am to 7 pm and each slot of 15 minutes.
-  const start = 10;
-  const end = 12//19;
-  const slot_dur = 60//15;
-
-    // max_limit is 2 registrations in each 15 minutes slot
-  const max_limit = 2;
-  const setupv = new setup_values(day_index, time_index, event_days, start, end, slot_dur, max_limit)
-  return setupv
-}
-
-
 
 function create_time_slots(start, end, slot_dur, days){
 
