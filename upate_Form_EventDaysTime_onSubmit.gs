@@ -13,13 +13,10 @@ function update_dropdown(){
   
     // If all dates and their slots are filled
   var day_choices = selected_day_item.asMultipleChoiceItem().getChoices();
-  for (var i = 0; i < day_choices.length; i++){
-    if (day_choices[i].getValue() == 'I wish to be added to the waitlist'){
-      return;
-    }
+
+  if (day_choices[0].getValue() == 'I wish to be added to the waitlist'){
+       return;
   }
-
-
 
   // If the slots were not full for atleast one date
   const time_slot_choices = create_time_slots(start, end, slot_dur, event_days.length);
